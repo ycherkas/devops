@@ -1,0 +1,2 @@
+# run backup.sh every day at 12:00 pm
+0 0 * * * /home/ycherkas/devops/practice1/backup.sh
