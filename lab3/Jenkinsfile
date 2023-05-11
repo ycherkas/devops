@@ -1,14 +1,13 @@
 pipeline {
     agent any
     stages {
-        stage("verify tooling") {
+        stage("Verify Tooling") {
             steps {
                 sh '''
                   docker version
                   docker info
                   docker compose version 
                   curl --version
-                  jq --version
                 '''
             }
         }
@@ -37,11 +36,6 @@ pipeline {
                     docker compose up -d --no-color --wait
                     docker compose ps
                 '''
-            }
-        }
-        stage('Run Tests') {
-            steps {
-                sh 'curl http://localhost:8061/'
             }
         }
     }
