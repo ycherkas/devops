@@ -2,6 +2,7 @@ resource "aws_instance" "instance" {
   for_each               = var.instance_count
   ami                    = var.ami
   instance_type          = var.instance_type
+  key_name               = "practice-key"
   vpc_security_group_ids = var.security_group_ids
   subnet_id              = var.subnet_id
   root_block_device {
@@ -21,4 +22,23 @@ resource "aws_instance" "instance" {
     Environment = var.environment
   }
   user_data = var.user_data
+
+  connection {
+    type        = "ssh"
+    user        = "ubuntu"
+    private_key = "${file(var.private_key_path)}"
+    host        = "${self.public_ip}"
+  } 
+
+  provisioner "file" {
+    source      = var.remote_exec_script
+    destination = "/tmp/script.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/script.sh",
+      "/tmp/script.sh args",
+    ]
+  }
 }

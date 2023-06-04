@@ -55,3 +55,13 @@ variable "user_data" {
   type    = string
   default = ""
 }
+
+variable "private_key_path" {
+  type    = string
+  default = ""
+}
+
+variable "remote_exec_script" {
+  type    = string
+  default = ""
+}
