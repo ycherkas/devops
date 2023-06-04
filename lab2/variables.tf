@@ -10,3 +10,7 @@ variable "vpc-cidr" {
 variable "environment" {
   default = "demo"
 }
+
+variable "private-key-path" {
+  default = "D:/KhPI/DevOps/practice-key.pem"
+}
